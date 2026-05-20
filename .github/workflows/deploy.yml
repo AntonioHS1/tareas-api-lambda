@@ -1,0 +1,33 @@
+
+name: Deploy to Lambda
+
+# Se ejecuta cada vez que hacemos push a la rama main
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest   # Máquina Ubuntu gratuita de GitHub
+
+    steps:
+      # Paso 1: Descargar el código del repo
+      - uses: actions/checkout@v4
+
+      # Paso 2: Configurar credenciales AWS desde los secrets
+      - name: Configurar AWS
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      # Paso 3: Empaquetar el código en un ZIP
+      - name: Empaquetar codigo
+        run: zip function.zip index.mjs
+
+      # Paso 4: Actualizar la función Lambda con el ZIP
+      - name: Desplegar a Lambda
+        run: |
+          aws lambda update-function-code \
+            --function-name tareas-api-handler \            --zip-file fileb://function.zip
