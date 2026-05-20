@@ -30,4 +30,5 @@ jobs:
       - name: Desplegar a Lambda
         run: |
           aws lambda update-function-code \
-            --function-name tareas-api-handler \            --zip-file fileb://function.zip
+            --function-name tareas-api-handler \            
+            --zip-file fileb://function.zip
