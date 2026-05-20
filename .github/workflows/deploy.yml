@@ -28,7 +28,4 @@ jobs:
 
       # Paso 4: Actualizar la función Lambda con el ZIP
       - name: Desplegar a Lambda
-        run: |
-          aws lambda update-function-code \
-            --function-name tareas-api-handler \            
-            --zip-file fileb://function.zip
+        run: aws lambda update-function-code --function-name tareas-api-handler --zip-file fileb://function.zip
