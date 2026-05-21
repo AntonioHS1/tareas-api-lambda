@@ -1,7 +1,7 @@
 // Importamos los clientes de DynamoDB del SDK de AWS
 import { DynamoDB } from '@aws-sdk/client-dynamodb';
 import { DynamoDBDocument } from '@aws-sdk/lib-dynamodb';
-
+//Prueba
 // Creamos la conexión con DynamoDB
 const client = new DynamoDB({});
 const dynamo = DynamoDBDocument.from(client);
